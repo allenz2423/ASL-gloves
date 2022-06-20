@@ -7,8 +7,8 @@
 #include <Wire.h>
 
 int THUMB, INDEX, MIDDLE, RING, PINKY;
-const char* ssid = "TP-Link_BA40";
-const char* password =  "56363968";
+const char* ssid = "SSID";
+const char* password =  "PASSWORD";
 
 Adafruit_MPU6050 mpu;
 
@@ -39,20 +39,9 @@ void loop() {
   MIDDLE = analogRead(GPIO_NUM_34);
   RING = analogRead(GPIO_NUM_35);
   PINKY = analogRead(GPIO_NUM_32);
-//  Serial.print(THUMB);
-//  Serial.print(", ");
-//  Serial.print(INDEX);
-//  Serial.print(", ");
-//  Serial.print(MIDDLE);
-//  Serial.print(", ");
-//  Serial.print(RING);
-//  Serial.print(", ");
-//  Serial.print(PINKY);
-//  Serial.println();
-//  delay(10);
   if(WiFi.status() == WL_CONNECTED){
     HTTPClient http;
-    http.begin("192.168.0.124", 5000);
+    http.begin("IP", 5000);
     http.addHeader("Content-Type", "multipart/form-data");
     int hand [5] = {THUMB, INDEX, MIDDLE, RING, PINKY};
     int httpResponseCode = http.POST(String(THUMB) + ", " + String(INDEX) + ", " + String(MIDDLE) + ", " + String(RING) + ", " + String(PINKY) + ", " + String(a.acceleration.x) + ", " + String(a.acceleration.y) + ", " + String(a.acceleration.z) + ", " + String(g.gyro.x) + ", " + String(g.gyro.y) + ", " + String(g.gyro.z));
