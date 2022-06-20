@@ -16,9 +16,11 @@ with open("fingerdata/Allen/Allen_" + current_letter + ".csv", "w") as file:
 
 
 def write_data(data):
-    with open("fingerdata/Allen/Allen_" + current_letter + ".csv", "a") as file:
+    with open("fingerdata/Allen/Allen_" + current_letter + ".csv", "a", newline='') as file:
         writer = csv.writer(file)
-        data.append(current_letter)
+        for character in current_letter:
+            current_letters = ord(character) - 96;
+        data.append(current_letters)
         writer.writerow(data)
 
 app = Flask(__name__)
