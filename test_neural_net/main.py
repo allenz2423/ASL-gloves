@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import csv
 
-current_letter = input("Enter the letter: ")
+# current_letter = input("Enter the letter: ")
 
 def init_data():
     with open("fingerdata/Allen/Allen_" + current_letter + ".csv", "w") as file:
@@ -25,6 +25,8 @@ def write_data(data):
         writer.writerow(data)
 
 # init_data()
+model = tf.keras.models.load_model("../neural_network/initial_model.h5")
+model.load_weights("../neural_network/initial_model.h5")
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def main():
@@ -32,7 +34,18 @@ def main():
         data = request.get_data()
         data = data.decode('utf-8')
         data = data.split(", ")
-        write_data(data)
+        data = [float(i) for i in data]
+        print(data)
+        predict = model.predict([data])
+        predict = np.argmax(tf.nn.sigmoid(predict[0]))
+        if predict == 0:
+            predict = "A"
+        elif predict == 1:
+            predict = "B"
+        elif predict == 2:
+            predict = "C"
+        # write_data(data)
+        print(predict + predict + predict + predict + predict)
         return "Success"
 app.run(host='0.0.0.0', port=5000)
 

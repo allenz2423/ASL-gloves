@@ -17,4 +17,4 @@
             4. Hard to keep superglued
         - Val's indexers are just much better for the job. They're far more accurate due to the use of potentiometers instead of flex sensors, which could lead to higher quality data. 
     - Write a neural network that can translate the hand movements into images. This shouldn't be that hard.
-    - USe the same neural network and match it with an ASL dictionary.
+    - USe the same neural network and match it with an ASL dict\
