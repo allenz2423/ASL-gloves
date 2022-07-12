@@ -12,9 +12,9 @@ current_letter = input("Enter the letter: ")
 def init_data():
     with open("fingerdata/Allen/Allen_" + current_letter + ".csv", "w") as file:
         writer = csv.writer(file)
-        writer = csv.DictWriter(file, fieldnames = ["Thumb", "Index", "Middle", "Ring", "Pinky", "AccelX", "AccelY", "AccelZ", "GyroX", "GyroY", "GyroZ", "Letter"], lineterminator = '\n')
+        writer = csv.DictWriter(file, fieldnames = ["Thumb Curl", "Index Curl", "Middle Curl", "Ring Curl", "Pinky Curl", "Thumb Splay", "Index Splay", "Middle Splay", "Ring Splay", "Pinky Splay", "Letter"], lineterminator = '\n')
         writer.writeheader()
-
+#  "AccelX", "AccelY", "AccelZ", "GyroX", "GyroY", "GyroZ",
 
 def write_data(data):
     with open("fingerdata/Allen/Allen_" + current_letter + ".csv", "a", newline='') as file:
@@ -33,6 +33,7 @@ def main():
         data = data.decode('utf-8')
         data = data.split(", ")
         write_data(data)
+        print(data)
         return "Success"
 app.run(host='0.0.0.0', port=5000)
 
